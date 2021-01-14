@@ -1,6 +1,6 @@
 from unittest import TestCase
 import numpy as np
-from cmfsapy.dimension import fsa
+from cmfsapy.dimension.fsa import fsa
 
 class Test(TestCase):
     def test_fsa(self):
