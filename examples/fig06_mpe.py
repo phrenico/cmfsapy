@@ -23,18 +23,19 @@ import numpy as np
 import pandas as pd
 import subprocess
 import matplotlib.pyplot as plt
-from src.evaluation.mpe import compute_mpe, compute_pe, compute_p_error
-from src.algorithm.correction import correct_estimates, compute_mFS_correction_coef
+from cmfsapy.evaluation.mpe import compute_mpe, compute_pe, compute_p_error
+from cmfsapy.dimension.correction import correct_estimates
 from scipy.io import loadmat
-from src.visualization.constants import *
+from constants import *
 
 
 
-load_path = "../../datasets/processed/ncube/synthetic/"
-save_path = "../../reports/"
+load_path = "./benchmark_result/"
+save_path = "./"
 fn = 'synthetic_res.npy'
-matlab_fname = 'danco_dims_M.mat'
-big_k_fname = "synthetic_krange20_res.npy"
+corrected_fn = "cmfsa_benchmark_res.npy"
+matlab_fname = 'danco_matlab_benchmark_res.mat'
+big_k_fname = "fsa_krange20_benchmark_res.npy"
 
 res = np.load(load_path+fn)
 intdims = np.array([[10, 3, 4, 4, 2, 6, 2, 20, 10, 17, 24, 70, 2, 20, 1]]).T
@@ -45,8 +46,8 @@ instances = 100
 
 # load parameters
 K = 5
-powers = np.load('powers.npy')
-alphas = np.load('coefs.npy')
+powers = np.load(load_path+'powers.npy')
+alphas = np.load(load_path+'coefs.npy')
 print("Powers, alphas, k")
 print(powers)
 print(alphas)
@@ -55,7 +56,8 @@ print('calibration OK')
 
 # load results and correction
 res = np.load(load_path+big_k_fname)[:, :, K-1]
-corr_res =  correct_estimates(res, alphas, powers)
+corr_res = correct_estimates(res, alphas, powers)
+# corr_res = np.load(load_path+corrected_fn)
 corr_res_int = np.round(corr_res)
 ml_res =  np.load(load_path+'ml_'+fn)[:, :instances]
 danco_res =  np.load(load_path+'danco_'+fn)[:, :instances]
@@ -138,7 +140,7 @@ axs[1].set_ylabel('Error rate')
 
 fig.tight_layout(rect=[0,0,1,1])
 # fig.savefig(save_path+"errors.png")
-fig.savefig(save_path+"Figure6.pdf", )
+fig.savefig(save_path+"Figure6.pdf", **save_kwargs)
 
 print(P_err.mean(axis=1))
 plt.show()

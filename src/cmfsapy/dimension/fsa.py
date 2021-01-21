@@ -1,6 +1,8 @@
 import numpy as np
 from scipy.spatial import cKDTree
 from multiprocessing import cpu_count
+from statistics import harmonic_mean
+
 
 def get_dists_inds_ck(X, k, boxsize):
     tree = cKDTree(X, boxsize=boxsize)
@@ -30,3 +32,21 @@ def fsa(X, k, boxsize=None):
     dists, inds = get_dists_inds_ck(X, 2*k, boxsize)
     dims = szepesvari_dimensionality(dists)
     return dims, dists, inds
+
+def ml_estimator(normed_dists):
+    return -1./ np.nanmean(np.log(normed_dists), axis=1)
+
+def ml_dims(X, k2, k1=1):
+    """Maximum likelihood estimator af intrinsic dimension (Levina-Bickel)"""
+    dists, inds = get_dists_inds_ck(X, k2+1, boxsize=None)
+    norm_dists = dists / dists[:, -1:]
+    dims = ml_estimator(norm_dists[:, k1:-1])
+    return dims, dists, inds
+
+def szepes_ml(local_d):
+    """maximum likelihood estimator from local szepesvari estimates (for k=1)
+
+    :param local_d:
+    :return:
+    """
+    return  harmonic_mean(local_d) / np.log(2)
