@@ -18,7 +18,7 @@ def polynom_func(p, x, powers=[1, 2, 3]):
     """
     return np.array([p[i] * x ** (powers[i]) for i in range(len(powers))]).sum(axis=0)
 
-def compute_mFS_correction_coef(d, E, powers=[1, 2]):
+def compute_mFSA_correction_coef(d, E, powers=[1, 2]):
     """Compute the regression coefficients with Orthogonal Distance Regression
 
     :param numpy.ndarray of float d: dimension values
@@ -65,5 +65,5 @@ def correct_mFSA(d, E, powers):
     :return: corrected estimates
     :rtype: numpy.ndarray of float
     """
-    alpha = compute_mFS_correction_coef(d, E, powers)
+    alpha = compute_mFSA_correction_coef(d, E, powers)
     return correct_estimates(d, alpha, powers)

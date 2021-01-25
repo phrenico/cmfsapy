@@ -1,6 +1,6 @@
 from unittest import TestCase
 from cmfsapy.dimension.correction import correct_estimates, polynom_func, \
-    compute_mFS_correction_coef, correct_mFSA
+    compute_mFSA_correction_coef, correct_mFSA
 import numpy as np
 
 
@@ -18,7 +18,7 @@ class Test(TestCase):
         d = np.random.rand(1000).reshape(100, 10)
         powers = [1, 2, 3]
         E = d / 2
-        coefs = compute_mFS_correction_coef(d, E, powers)
+        coefs = compute_mFSA_correction_coef(d, E, powers)
 
 
     def test_correct_m_fsa(self):
