@@ -15,7 +15,7 @@ empirical and theoretical probability density functions:
 python fig01_FSA_pdfs.py
 ```
 
-<embed src="Figure1.pdf" type="application/pdf">
+<embed src="./Figure1.pdf" type="application/pdf">
 
 
 ## Generate Figure 2
