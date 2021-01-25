@@ -9,7 +9,7 @@ and also run custom matlab scripts to get the DANCo results first.
         $ octave gen_benchmark_data.m
         
 0.1. Generate DANCo results with matlab
-@todo:me experiment out hte procedure
+@todo:me experiment out the procedure
 
 
 1. generates results
@@ -30,8 +30,8 @@ from constants import *
 
 
 
-load_path = "./benchmark_result/"
-save_path = "./"
+load_path = "benchmark_result/"
+save_path = "../"
 fn = 'synthetic_res.npy'
 corrected_fn = "cmfsa_benchmark_res.npy"
 matlab_fname = 'danco_matlab_benchmark_res.mat'
@@ -59,8 +59,8 @@ res = np.load(load_path+big_k_fname)[:, :, K-1]
 corr_res = correct_estimates(res, alphas, powers)
 # corr_res = np.load(load_path+corrected_fn)
 corr_res_int = np.round(corr_res)
-ml_res =  np.load(load_path+'ml_'+fn)[:, :instances]
-danco_res =  np.load(load_path+'danco_'+fn)[:, :instances]
+ml_res =  np.load(load_path+'ml_benchmark_res.npy')[:, :instances]
+danco_res =  np.load(load_path+'danco_r_benchmark_res.npy')[:, :instances]
 M = loadmat(load_path+matlab_fname)['dims']
 danco_matlab_fract = M[:, :, 0]
 danco_matlab = M[:, :, 1]
@@ -108,7 +108,7 @@ err_mpe = pe.std(axis=1) / np.sqrt(pe.shape[1])
 P_err = np.array([compute_p_error(corr_res_int, intdims, axis=1),
                  compute_p_error(danco_matlab, intdims, axis=1)])
 
-print(P_err)
+# print(P_err)
 
 
 # Plot results

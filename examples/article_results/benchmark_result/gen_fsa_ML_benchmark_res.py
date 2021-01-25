@@ -12,7 +12,7 @@ from cmfsapy.dimension.fsa import fsa, ml_dims, szepes_ml
 # MPE kiszamitasa: (100/n)∑M(|d^ −d/d)
 # de real-world adatnal egy intervallum meajeatol szamitott tavolsagot kell szmolni
 load_path = "../benchmark_data/manifold_data/"
-save_path = "./"
+save_path = "/"
 
 datasets = [1, 2, 3, 4, 5, 6, 7, 9, 101, 102, 103, 104, 11, 12, 13]
 D = [11, 5, 6, 8, 3, 36, 3, 20, 11, 18, 25, 71, 3, 20, 13]

@@ -10,7 +10,7 @@ from cmfsapy.dimension.correction import correct_estimates
 
 
 load_path = "../benchmark_data/manifold_data/"
-save_path = "./"
+save_path = "/"
 os.makedirs(save_path, exist_ok=True)
 datasets = [1, 2, 3, 4, 5, 6, 7, 9, 101, 102, 103, 104, 11, 12, 13]
 D = [11, 5, 6, 8, 3, 36, 3, 20, 11, 18, 25, 71, 3, 20, 13]
@@ -18,8 +18,8 @@ intdims = [10, 3, 4, 4, 2, 6, 2, 20, 10, 17, 24, 70, 2, 20, 1]
 names = [1, 2, 3, 4, 5, 6, 7,  9, 101, 102, 103, 104, 11, 12, 13]
 
 N = 100
-alphas = np.load('./coefs.npy')
-powers = np.load('./powers.npy')
+alphas = np.load('coefs.npy')
+powers = np.load('powers.npy')
 
 result = np.zeros([15, N])
 

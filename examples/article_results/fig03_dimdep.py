@@ -51,9 +51,9 @@ for l in tqdm(range(len(ns))):
     m = id_m_dict[n].mean(axis=1)
     std = id_m_dict[n].std(axis=1)
 
-    axs[l].plot(D, D, 'k--')
-    axs[l].plot(D, id_m_dict[n], '-', alpha=0.05, color=basic_colors[l])
-    axs[l].plot(D, m, '-', color=basic_colors[l], lw=2., label=r"$n={}$".format(n))
+    axs[l].plot(Ds, Ds, 'k--')
+    axs[l].plot(Ds, id_m_dict[n], '-', alpha=0.05, color=basic_colors[l])
+    axs[l].plot(Ds, m, '-', color=basic_colors[l], lw=2., label=r"$n={}$".format(n))
     # axs[l].plot(my_d, m - 2*std, '--', color=basic_colors[l], lw=2., label=r"$2 \sigma$")
     # axs[l].plot(my_d, m + 2*std, '--', color=basic_colors[l], lw=2.)
     # axs[l].legend(handlelength=0., loc=2)
