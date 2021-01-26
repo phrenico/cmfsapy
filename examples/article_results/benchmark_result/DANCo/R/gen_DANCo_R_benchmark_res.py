@@ -48,7 +48,7 @@ for j in tqdm(range(15)):
             myd = np.nan
             res[j, i-1] = myd
 
-np.save(save_path+'danco_synthetic_res', res)
+np.save(save_path+'danco_r_benchmark_res', res)
 
 import matplotlib.pyplot as plt
 # plt.figure()

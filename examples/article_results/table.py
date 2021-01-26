@@ -14,7 +14,7 @@ from constants import *
 
 
 load_path = "benchmark_result/"
-save_path = "../"
+save_path = "./"
 save_fname = 'table_benchmark.tex'
 
 fn = 'synthetic_res.npy'
@@ -37,7 +37,7 @@ alphas = np.load(load_path+'coefs.npy')
 
 
 res = np.load(load_path+big_k_fname)[:, :, K-1]
-corr_res =  correct_estimates(res, alphas, powers)
+corr_res = np.load(load_path+'cmfsa_benchmark_res.npy')
 corr_res_int = np.round(corr_res)
 ml_res =  np.load(load_path+'ml_benchmark_res.npy')[:, :instances]
 danco_res =  np.load(load_path+'danco_r_benchmark_res.npy')[:, :instances]

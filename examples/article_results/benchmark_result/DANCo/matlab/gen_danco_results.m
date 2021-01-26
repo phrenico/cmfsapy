@@ -8,13 +8,13 @@ n = 100;
 dims = zeros(m, n, 2);
 progressbar
 for j=1:m
-    myFiles = dir(fullfile('/home/phrenico/Projects/Codes/dimension-correction/datasets/outer/synthetic/', strcat('M_', names(j),'_*.mat')));
+    myFiles = dir(fullfile('../../../benchmark_data/manifold_data/', strcat('M_', names(j),'_*.mat')));
     for i=1:n
         load(myFiles(i).name);
-        dims(j, i, 1) = DANCoFit(x, 'fractal', true, 'modelfile', '/home/phrenico/Projects/Codes/dimension-correction/notebooks/matlab/idEstimation/DANCo_fits');
-        dims(j, i, 2) = DANCoFit(x, 'fractal', false);
+        dims(j, i, 1) = DANCoFit(x, 'fractal', true, 'modelfile', './idEstimation/DANCo_fits');
+        dims(j, i, 2) = DANCoFit(x, 'fractal', false, 'modelfile', './idEstimation/DANCo_fits');
     end
     progressbar(j/m)
 end
-save_name = "../../danco_dims_M";
+save_name = "../../danco_matlab_benchmark_res";
 save(save_name, 'dims');

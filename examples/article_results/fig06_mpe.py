@@ -31,7 +31,7 @@ from constants import *
 
 
 load_path = "benchmark_result/"
-save_path = "../"
+save_path = "./"
 fn = 'synthetic_res.npy'
 corrected_fn = "cmfsa_benchmark_res.npy"
 matlab_fname = 'danco_matlab_benchmark_res.mat'
@@ -43,21 +43,11 @@ names = ['$M_1$', '$M_2$', '$M_3$', '$M_4$', '$M_5$', '$M_6$', '$M_7$',  '$M_9$'
          r'$M_{10c}$', '$M_{10d}$', '$M_{11}$', '$M_{12}$', '$M_{13}$']
 nums = range(1, 16)
 instances = 100
-
-# load parameters
 K = 5
-powers = np.load(load_path+'powers.npy')
-alphas = np.load(load_path+'coefs.npy')
-print("Powers, alphas, k")
-print(powers)
-print(alphas)
-print(K)
-print('calibration OK')
 
 # load results and correction
 res = np.load(load_path+big_k_fname)[:, :, K-1]
-corr_res = correct_estimates(res, alphas, powers)
-# corr_res = np.load(load_path+corrected_fn)
+corr_res = np.load(load_path+corrected_fn)
 corr_res_int = np.round(corr_res)
 ml_res =  np.load(load_path+'ml_benchmark_res.npy')[:, :instances]
 danco_res =  np.load(load_path+'danco_r_benchmark_res.npy')[:, :instances]

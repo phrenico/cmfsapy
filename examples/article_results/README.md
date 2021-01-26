@@ -157,3 +157,35 @@ octave gen_benchmark_data.m
 This will generate the data files into the ./manifold_data/ folder.
 
 ### Generate benchmark results
+
+To generate mFSA results run:
+```
+python gen_fsa_krange_benchmark.py 
+```
+
+To generate cmFSA results run:
+```
+python gen_cmfsa_benchmark.py 
+```
+
+To generate Maximum-Likelihood (Levina-Bickel) results run:
+```
+python gen_ML_benchmark.py 
+```
+
+To generate DANCo results enter to the benchmark_result/DANCo/ folder,
+then chose the implementation to generate result-data.
+
+To generate the DANCo results with the idEstimation matlab implementation enter 
+to the ./benchmark_result/DANCo/matlab/ subfolder and run gen_danco_results.m with matlab.
+Unfortunately the package at the time is not compatible with GNU octave or Scilab.
+
+
+To generate the DANCo results with the intrinsicDimension R package 
+you can run the gen_DANCo_R_benchmark_res.py python file, which uses the rpy2 package.
+This package unfortunately is not compatible with python3, so you should run the script e.g. in a
+python2.7 virtual environment:
+```
+python gen_DANCo_R_benchmark_res.py 
+```
+This operation can take a while...

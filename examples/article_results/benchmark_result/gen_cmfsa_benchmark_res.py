@@ -10,7 +10,7 @@ from cmfsapy.dimension.correction import correct_estimates
 
 
 load_path = "../benchmark_data/manifold_data/"
-save_path = "/"
+save_path = "./"
 os.makedirs(save_path, exist_ok=True)
 datasets = [1, 2, 3, 4, 5, 6, 7, 9, 101, 102, 103, 104, 11, 12, 13]
 D = [11, 5, 6, 8, 3, 36, 3, 20, 11, 18, 25, 71, 3, 20, 13]
@@ -38,7 +38,7 @@ for j in tqdm(range(15)):
 
     result[j, :] = correct_estimates(m.copy(), alpha=alphas, powers=powers)
 
-np.save(save_path+'cmfsa_enchmark_res', result)
+np.save(save_path+'cmfsa_benchmark_res', result)
 
 
 # plt.figure()
