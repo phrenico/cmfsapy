@@ -15,7 +15,7 @@ empirical and theoretical probability density functions:
 python fig01_FSA_pdfs.py
 ```
 
-<embed src="./Figure1.pdf" type="application/pdf">
+<embed src="http://phrenico.github.com/cmfsapy/examples/article_results/Figure1.pdf" type="application/pdf">
 
 ## Generate Figure 2
 Run the fig02medianFSA.py file to generate the second figure:
