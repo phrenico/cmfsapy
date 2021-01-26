@@ -15,7 +15,7 @@ empirical and theoretical probability density functions:
 python fig01_FSA_pdfs.py
 ```
 
-<embed src="http://phrenico.github.com/cmfsapy/examples/article_results/Figure1.pdf" type="application/pdf">
+<embed src="./Figure1.pdf" type="application/pdf">
 
 ## Generate Figure 2
 Run the fig02medianFSA.py file to generate the second figure:
@@ -120,6 +120,13 @@ These data-files can be generated from the scripts in the repository,
 for details see the "Generate benchmark data-files and results" section below.
 
 ## Generate benchmark data-files and results
+To generate the data and reproduce the results
+you will need GNU octave, matlab and R beyond pure python. 
 
 ### Generate benchmark data
-To generate 
+To generate benchmark dataset, first run the ./benchmark_data/gen_benchmark_data.m file 
+from the benchmark data folder:
+```
+octave gen_benchmark_data.m
+```
+This will generate the data files to the manifold_data/ folder.
