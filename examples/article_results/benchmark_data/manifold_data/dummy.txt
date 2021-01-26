@@ -1,0 +1,2 @@
+This is the place for the benchmark dataset.
+You can generate the data by the ../gen_benchmark_data.m octave script.
