@@ -16,6 +16,14 @@ python fig01_FSA_pdfs.py
 ```
 
 <embed src="./Figure1.pdf" type="application/pdf">
+<embed src="./Figure1.pdf" type="application/pdf">
+<object data="https://github.com/phrenico/cmfsapy/blob/main/examples/article_results/Figure1.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="./Figure1.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: 
+<a href="https://github.com/phrenico/cmfsapy/blob/main/examples/article_results/Figure1.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
 
 ## Generate Figure 2
 Run the fig02medianFSA.py file to generate the second figure:
@@ -129,4 +137,6 @@ from the benchmark data folder:
 ```
 octave gen_benchmark_data.m
 ```
-This will generate the data files to the manifold_data/ folder.
+This will generate the data files into the ./manifold_data/ folder.
+
+### Generate benchmark results
