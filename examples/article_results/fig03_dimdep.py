@@ -1,7 +1,7 @@
 """This script generates Figure3.pdf
 
 1. Generate data and measure intrinsic dimensions
-2. Visualization
+2. Visualize measured mFSA estimator in the function of embedding dimension
 
 """
 import numpy as np
@@ -17,6 +17,7 @@ from constants import *
 # Generate data and measure dimensions for different embedding dimensions (D), sample_sizes (n), 100 realization each
 # The dimensions computed with periodic boundary condition in the unit n-cube
 gen_and_measure = False  # if True, then generates dimension measurements and save it into Figure03_data.pkl (It takes hours)
+overwrite = False  # Overwrites original dimension measurements stored in "Figure03_data.pkl"
 
 Ds = np.arange(2, 31)
 ns = [10, 100, 500, 1000, 2500, 10000]
@@ -35,9 +36,12 @@ if gen_and_measure:
                 for D in tqdm(Ds)])
         id_m_dict[n] = id_m
 
-    with open(fn_data, 'wb') as f:
-        pickle.dump(id_m_dict, f)
+    if overwrite:
+        # Overwrite the original file
+        with open(fn_data, 'wb') as f:
+            pickle.dump(id_m_dict, f)
 else:
+    # Load data from file
     with open(fn_data, 'rb') as f:
         id_m_dict = pickle.load(f)
 
@@ -73,4 +77,4 @@ for l in tqdm(range(len(ns))):
 plt.tight_layout(rect=[0, 0, 1, 1], pad=0, h_pad=0, w_pad=0)
 
 plt.savefig('Figure3.pdf', **save_kwargs)
-plt.show()
+# plt.show()

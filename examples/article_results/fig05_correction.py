@@ -17,6 +17,7 @@ from constants import *
 # Generate data and measure dimensions for different embedding dimensions (D), sample_sizes (n), 100 realization each
 # The dimensions computed with periodic boundary condition in the unit n-cube
 gen_and_measure = False  # if True, then generates dimension measurements and save it into Figure03_data.pkl (It takes hours)
+overwrite = False  # overwrites previously generated data in "Figure05_data.pkl" if True
 
 Ds = np.arange(2, 31)
 ns = [10, 100, 500, 1000, 2500, 10000]
@@ -34,9 +35,9 @@ if gen_and_measure:
                      for j in range(realiz_id)]
                 for D in tqdm(Ds)])
         id_m_dict[n] = id_m
-
-    with open(fn_data, 'wb') as f:
-        pickle.dump(id_m_dict, f)
+    if overwrite:
+        with open(fn_data, 'wb') as f:
+            pickle.dump(id_m_dict, f)
 else:
     with open(fn_data, 'rb') as f:
         id_m_dict = pickle.load(f)

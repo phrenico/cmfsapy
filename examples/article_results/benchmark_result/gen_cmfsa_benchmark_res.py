@@ -18,6 +18,7 @@ intdims = [10, 3, 4, 4, 2, 6, 2, 20, 10, 17, 24, 70, 2, 20, 1]
 names = [1, 2, 3, 4, 5, 6, 7,  9, 101, 102, 103, 104, 11, 12, 13]
 
 N = 100
+K = 5
 alphas = np.load('coefs.npy')
 powers = np.load('powers.npy')
 
@@ -32,7 +33,7 @@ for j in tqdm(range(15)):
         fn = 'M_{}_{}.mat'.format(datasets[j], i)
         M = loadmat(load_path+fn)['x']
 
-        d = fsa(M.T, k=1)[0][:, -1]
+        d = fsa(M.T, k=K)[0][:, -1]
         m[i-1] = np.nanmedian(d)
 
     result[j, :] = correct_estimates(m.copy(), alpha=alphas, powers=powers)
