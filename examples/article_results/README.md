@@ -17,10 +17,10 @@ python fig01_FSA_pdfs.py
 
 <embed src="./Figure1.pdf" type="application/pdf">
 <embed src="./Figure1.pdf" type="application/pdf">
-<object data="https://github.com/phrenico/cmfsapy/blob/main/examples/article_results/Figure1.pdf" type="application/pdf" width="700px" height="700px">
+<object data="https://phrenico.github.com/cmfsapy/examples/article_results/Figure1.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="./Figure1.pdf">
         <p>This browser does not support PDFs. Please download the PDF to view it: 
-<a href="https://github.com/phrenico/cmfsapy/blob/main/examples/article_results/Figure1.pdf">Download PDF</a>.</p>
+<a href="https://phrenico.github.com/cmfsapy/examples/article_results/Figure1.pdf">Download PDF</a>.</p>
     </embed>
 </object>
 
