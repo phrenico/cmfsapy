@@ -167,6 +167,8 @@ To generate cmFSA results run:
 ```
 python gen_cmfsa_benchmark.py 
 ```
+Here the script uses the saved results of a calibration procedure (coefs.npy and powers.npy),
+you can recalibrate the method by running the calibration.py file.
 
 To generate Maximum-Likelihood (Levina-Bickel) results run:
 ```
