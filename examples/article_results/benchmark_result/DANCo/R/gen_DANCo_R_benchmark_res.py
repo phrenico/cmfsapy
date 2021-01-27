@@ -25,19 +25,21 @@ names = [1, 2, 3, 4, 5, 6, 7,  9, 101, 102, 103, 104, 11, 12, 13]
 fns = ['M_1', 'M_2', 'M_3', 'M_4', 'M_5', 'M_6', 'M_7',  'M_9', 'M_101', 'M_102',
          'M_103', 'M_104', 'M_11', 'M_12', 'M_13']
 
-
+# Precompute calibration data for DANCo
 caldata = idr.DancoCalibrationData(k=10, N=2500)
 
 for i in tqdm(range(80)):
     caldata =  idr.increaseMaxDimByOne(caldata)
 
 
+# Estimate dimensions on benchmark datasets
 iterations = 100
 res = np.zeros([15, iterations])
 for j in tqdm(range(15)):
     for i in tqdm(range(1, iterations+1), leave=False):
         fn = '{}_{}.mat'.format(fns[j], i)
         x = loadmat(load_path+fn)['x'].T[:2500, :]
+
         xr = ro.r.matrix(x, nrow=x.shape[0], ncol=x.shape[1])
 
         try:
