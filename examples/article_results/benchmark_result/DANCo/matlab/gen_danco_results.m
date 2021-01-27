@@ -2,7 +2,7 @@ addpath(genpath('../../benchmark_data/manifold_data/'));
 addpath(genpath('./idEstimation/idEstimation/'));
 addpath(genpath('./progressbar/)'));
 
-names = ["1", "2", '3' '4' '5' '6' '7' '9' '101' '102' '103' '104' '11' '12' '13'];
+names = ['1', '2', '3' '4' '5' '6' '7' '9' '101' '102' '103' '104' '11' '12' '13'];
 m = length(names);
 n = 100;
 dims = zeros(m, n, 2);
@@ -16,5 +16,5 @@ for j=1:m
     end
     progressbar(j/m)
 end
-save_name = "../../danco_matlab_benchmark_res";
+save_name = '../../danco_matlab_benchmark_res';
 save(save_name, 'dims');
