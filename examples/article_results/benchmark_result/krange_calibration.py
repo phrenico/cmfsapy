@@ -1,38 +1,21 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from tqdm import tqdm
-from cmfsapy.dimension.fsa import fsa
-from cmfsapy.data import gen_ncube
+from cmfsapy.dimension.cmfsa import calibrate
 
-import os
+print(np.load('coefs.npy'))
 
+n = 2500
 
-save_path = ""
-os.makedirs(save_path, exist_ok=True)
-
-
-ns = [2500]
-
-colors = ['tab:blue', 'tab:orange', 'tab:green']
 realiz_id = 100
 my_d = np.arange(2, 81)
-myk = 20
+myk = 5
 box = None
 
+powers = [-1, 1, 2, 3]
 
-for l, n in enumerate(ns):
-    dim_range = []
-    for d in tqdm(my_d):
-        realizations = []
-        for j in range(realiz_id):
-            X = gen_ncube(n, d, j)
-            dims, distances, indices = fsa(X, myk, boxsize=box)
-            realizations.append(dims)
-        dim_range.append(realizations)
+coefs = calibrate(n, myk, my_d, realiz_id, powers, box=box)
 
-    dim_range = np.array(dim_range)
+powers = np.save("powers.npy", powers)
+powers = np.save("coefs.npy", coefs)
 
-    np.savez(save_path+"calibration_krange{}_n{}_d{}".format(myk, n, d), **{'d':my_d.reshape([-1, 1, 1]),
-                                                                            'k':np.arange(myk+1),
-                                                                            'dims': dim_range})
-    print(dim_range.shape)
+print(coefs)
+#[-6.58771515e-02  2.64684341e-02 -3.47457150e-04  3.81308540e-06]

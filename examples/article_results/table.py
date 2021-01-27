@@ -17,12 +17,10 @@ load_path = "benchmark_result/"
 save_path = "./"
 save_fname = 'table_benchmark.tex'
 
-fn = 'synthetic_res.npy'
 corrected_fn = "cmfsa_benchmark_res.npy"
 matlab_fname = 'danco_matlab_benchmark_res.mat'
 big_k_fname = "fsa_krange20_benchmark_res.npy"
 
-res = np.load(load_path+fn)
 
 intdims = np.array([[10, 3, 4, 4, 2, 6, 2, 20, 10, 17, 24, 70, 2, 20, 1]]).T
 names = ['M_1', 'M_2', 'M_3', 'M_4', 'M_5', 'M_6', 'M_7',  'M_9', 'M_{10a}', 'M_{10b}',
