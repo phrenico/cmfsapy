@@ -7,3 +7,5 @@ graft tests
 graft examples
 graft docs
 graft src
+
+prune examples/article_results

@@ -1,10 +1,17 @@
 import numpy as np
 from scipy.spatial import cKDTree
 from multiprocessing import cpu_count
-from statistics import harmonic_mean
+from scipy.stats import hmean
 
 
 def get_dists_inds_ck(X, k, boxsize):
+    """computes the kNN distances and indices
+
+    :param numpy.ndarray X:  2D array with data shape: (ndata, n_vars)
+    :param int k: neighborhood size
+    :param float boxsize:  circular boundary condition to [0, boxsice] interval for all input dimensions if not None.
+    :return: KNN distances and indices
+    """
     tree = cKDTree(X, boxsize=boxsize)
     dists, inds = tree.query(X, k + 1, n_jobs=cpu_count())
     return dists, inds
@@ -44,9 +51,9 @@ def ml_dims(X, k2, k1=1):
     return dims, dists, inds
 
 def szepes_ml(local_d):
-    """maximum likelihood estimator from local szepesvari estimates (for k=1)
+    """maximum likelihood estimator from local FSA estimates (for k=1)
 
-    :param local_d:
-    :return:
+    :param numpy.ndarray of float local_d: local FSA estimates
+    :return: global ML-FSA estimate
     """
-    return  harmonic_mean(local_d) / np.log(2)
+    return  hmean(local_d) / np.log(2)

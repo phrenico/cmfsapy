@@ -1,12 +1,8 @@
 import numpy as np
 from scipy.io import loadmat
-import os
 from tqdm import tqdm
-from statistics import harmonic_mean
 
-import matplotlib.pyplot as plt
-
-from cmfsapy.dimension.fsa import ml_dims, szepes_ml, fsa
+from cmfsapy.dimension.fsa import ml_dims
 
 
 load_path = "../benchmark_data/manifold_data/"
