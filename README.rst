@@ -1,5 +1,6 @@
 Python implementation of the corrigated median Farahmand-Szepesvari-Audibert dimension estimator.
 
+
 Installation
 ------------
 
@@ -9,7 +10,7 @@ For basic usage of the package install it from PyPI:
 
    $ pip install cmfsapy
 
-For more examples and latest version clone this repo and install it from source.
+Or to get more examples and the latest version, clone this repo and install it from source!
 Navigate to the repository root folder and run:
 
 .. code-block:: bash
