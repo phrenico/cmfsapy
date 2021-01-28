@@ -17,7 +17,4 @@ Navigate to the repository root folder and run:
 
    $ pip install .
 
-Basic Usage
------------
-.. raw:: html
-   :file: examples/simple_example.html
+`Basic Usage <examples/simple_example.html>`_
