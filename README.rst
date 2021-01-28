@@ -17,4 +17,4 @@ Navigate to the repository root folder and run:
 
    $ pip install .
 
-`Basic Usage <examples/simple_example.html>`_
+`[examples] <https://github.com/phrenico/cmfsapy/tree/main/examples>`_
