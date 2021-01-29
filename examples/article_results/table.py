@@ -4,13 +4,29 @@
 
 import numpy as np
 import pandas as pd
-import subprocess
-import matplotlib.pyplot as plt
-from cmfsapy.evaluation.mpe import compute_mpe, compute_pe, compute_p_error
-from cmfsapy.dimension.correction import correct_estimates
+
+from cmfsapy.evaluation.mpe import compute_mpe
 from scipy.io import loadmat
 from constants import *
 
+def insert_charachter(mylist, charachter='&'):
+    """ inserts a charachter element between each list element
+
+    :param mylist:
+    :param charachter:
+    :return:
+    """
+    n_insertion = len(mylist)-2
+    n = len(mylist)
+    new_list = []
+    for i  in range(n):
+        for j in range(n_insertion):
+            w = i+j
+            if (w % 2) == 0:
+                new_list.append(mylist[i])
+            elif (w % 2) == 1:
+                new_list.append(charachter)
+    return new_list
 
 
 load_path = "benchmark_result/"
@@ -23,8 +39,8 @@ big_k_fname = "fsa_krange20_benchmark_res.npy"
 
 
 intdims = np.array([[10, 3, 4, 4, 2, 6, 2, 20, 10, 17, 24, 70, 2, 20, 1]]).T
-names = ['M_1', 'M_2', 'M_3', 'M_4', 'M_5', 'M_6', 'M_7',  'M_9', 'M_{10a}', 'M_{10b}',
-         'M_{10c}', 'M_{10d}', 'M_{11}', 'M_{12}', 'M_{13}']
+names = ['$M_1$', '$M_2$', '$M_3$', '$M_4$', '$M_5$', '$M_6$', '$M_7$',  '$M_9$', '$M_{10a}$', '$M_{10b}$',
+         '$M_{10c}$', '$M_{10d}$', '$M_{11}$', '$M_{12}$', '$M_{13}$']
 nums = range(1, 16)
 instances = 100
 
@@ -95,7 +111,7 @@ print("DANCo_matlab:", danco_mat_MPE.mean())
 
 print("ML:", compute_mpe(ml_res, intdims).mean())
 
-my_str = '&MPE& & {:.2f} & {:.2f}& {:.2f}& {:.2f}&{:.2f}&{:.2f}&{:.2f}&\n'.format(MPE.mean(),
+my_str = '&MPE& & {:.2f} & {:.2f}& {:.2f}& {:.2f}&{:.2f}&{:.2f}&{:.2f}\n'.format(MPE.mean(),
                                                                              cMPE.mean(),
                                                                              cMPE_int.mean(),
                                                                              danco_MPE.mean(),
