@@ -121,8 +121,9 @@ def plot_boxplot_duo(cgrid, sgrid, titles=['control', 'seizure']):
 
 
 if __name__=="__main__":
-    load_file = "Figure07_data.pkl"
-    save_path = "../"
+    load_file = "epi_data/Figure07_data.pkl"
+
+    save_path = "./"
     res_dict = pd.read_pickle(load_file)
     channels = res_dict['channels']
     # print(res_dict.keys())

@@ -3,10 +3,7 @@ import numpy as np
 from constants import *
 
 
-
-
-
-load_path = "./epi_embed/"
+load_path = "epi_data/epi_embed/"
 
 with open(load_path+'embedding_results', 'rb') as f:
     # results = pickle.load(f)
@@ -18,10 +15,11 @@ with open(load_path+'embedding_results', 'rb') as f:
 k1 = 10
 k2 = 20
 
+
 fig, axs = plt.subplots(4, 3, sharex=True, sharey=True, figsize=(8, 8))
 axs = np.array(axs).flatten()
 for i in range(12):
-    _ = axs[i].plot(control_res_dict[ i +1].T)
+    _ = axs[i].plot(control_res_dict[i+1][0].T)
     _ = axs[i].set_yticks(np.arange(0, 12, 2))
     _ = axs[i].set_ylim([0, 9])
 
@@ -75,6 +73,6 @@ ax1.set_xlabel(r'$D$')
 _ = axs[0].text(-0.15, 1.15, tagging[2], transform=axs[0].transAxes, **tag_kwargs)
 _ = ax.text(-0.15, 1.05, tagging[0], transform=ax.transAxes, **tag_kwargs)
 _ = ax1.text(-0.15, 1.05, tagging[1], transform=ax1.transAxes, **tag_kwargs)
-save_path = "./"
+save_path = ""
 fig.savefig(save_path + 'FigureS2.pdf')
 # plt.show()
