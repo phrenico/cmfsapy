@@ -26,7 +26,7 @@ def sec_2_index(secs, fr=2048, offset=0):
     return (secs*fr - offset*fr).astype(int)
 
 
-fn = "EEG.TRC"
+fn = "/home/phrenico/Projects/Data/MeMo/EEG_2800.TRC"
 reader = neo.io.MicromedIO(fn)
 channels = np.array([reader.header['signal_channels'][i][0] for i in range(106)])
 fr = reader.get_signal_sampling_rate()
@@ -56,7 +56,7 @@ for time in tqdm(times_sec_seizure):
 
 intermittent_save_path = "./"
 # with open(intermittent_save_path+'raw_data_dicts.pkl', 'wb') as f:  # save without bz2 compression
-with bz2.BZ2File(intermittent_save_path+'raw_data_dicts.pkl', 'wb') as f:
+with bz2.BZ2File(intermittent_save_path+'raw_data_dicts.pckl', 'wb') as f:
     pickle.dump({'control': control_chunks_dict,
                  'seizure': seizure_chunk_dict,
                  'channels': channels,

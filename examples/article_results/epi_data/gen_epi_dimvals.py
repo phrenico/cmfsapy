@@ -127,7 +127,7 @@ def get_gridded_from_locals(res_dict, indices, k1, k2):
 
 if __name__=="__main__":
     # load data
-    with bz2.BZ2File('./raw_data_dicts.pkl', 'rb') as f:
+    with bz2.BZ2File('./raw_data_dicts.pckl', 'rb') as f:
         raw_data = pickle.load(f)
 
     fr = raw_data['samplefreq']

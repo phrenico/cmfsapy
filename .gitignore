@@ -1,6 +1,5 @@
 # Data-sets
 examples/article_results/benchmark_data/manifold_data/*.mat
-examples/article_results/epi_data/raw_data_dicts.pkl
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
