@@ -72,7 +72,7 @@ if __name__=="__main__":
             myax.legend(stringadder(['k=', 'k=', 'k='], np.array(ks)))
 
     # f.suptitle('Theory vs. Simulations on Random uniforn n-cube \n $n$={}, periodic boundary'.format(n))
-    _ = [ax.set_xlabel(r'$d$') for ax in axs[[3, 4, 5]]]
+    _ = [ax.set_xlabel(r'$\delta$') for ax in axs[[3, 4, 5]]]
 
     for i in range(len(axs)):
         axs[i].set_title(r'$D={}$'.format(Ds[i]))
