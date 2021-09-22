@@ -5,6 +5,8 @@ from scipy.stats import norm
 from cmfsapy.dimension.correction import compute_mFSA_correction_coef, correct_estimates, polynom_func
 import time
 from constants import *
+from scipy.stats import normaltest, shapiro
+from statsmodels.stats.multitest import multipletests
 
 t0 = time.time()
 
@@ -49,10 +51,11 @@ P3 = P_error - P1 - P2
 
 
 
-fig = plt.figure(figsize=(9, 8))
+fig = plt.figure(figsize=(9, 12))
 
 
-plt.subplot(221)
+
+plt.subplot(321)
 plt.plot(D[:, 0, 0], correct_estimates(d[:, :, K], coefs, powers).round(), 'r.', alpha=0.01, ms=10)
 plt.plot(D[:, 0, 0], correct_estimates(d[:, :, K], coefs, powers).round().mean(axis=1), '-', color='gold')
 plt.plot(D[:, 0, 0], d[:, :, K], 'b.', alpha=0.01, ms=10)
@@ -63,7 +66,7 @@ plt.xlabel(r'$D$')
 plt.ylabel(r'$\hat{d}$')
 
 
-plt.subplot(222)
+plt.subplot(322)
 _ = plt.plot(d[:, :, K], np.log(E[:, :, K]), 'b.', ms=2)
 _ = plt.plot(d[:, :, K].mean(axis=1), np.log(E[:, :, K]).mean(axis=1), '.', ms=5, color='gold')
 x = np.arange(1, 48).astype(float)
@@ -75,7 +78,7 @@ plt.xlabel(r'$\hat{d}$')
 plt.ylabel(r'$\log{E}$')
 
 
-plt.subplot(223)
+plt.subplot(323)
 plt.plot(D[:, :, 0], errors, alpha=0.2, color='tab:orange')
 plt.plot(D[:, :, 0], errors.mean(axis=1), alpha=1, label='$\mu_{\mathrm{error}}$')
 plt.plot(D[:, :, 0], errors.mean(axis=1)+3 * errors.std(axis=1), alpha=1, color='tab:blue', ls='--', label='$3\sigma_{\mathrm{error}}$' )
@@ -89,7 +92,7 @@ plt.ylabel(r"error")
 plt.legend()
 
 
-plt.subplot(224)
+plt.subplot(324)
 plt.plot(D[:, :, 0], P_correct, 'ro', label='$P_{\mathrm{correct}}$')
 plt.plot(D[:, :, 0], P_error, 'bs', label='$P_{\mathrm{error}}$')
 plt.plot(D[:, :, 0], P1, '-', label='$P_{\mathrm{error}} (|E|= 1)$')
@@ -108,6 +111,38 @@ plt.xlim([0, 80])
 plt.xlabel(r"D")
 plt.ylabel(r"P")
 
+plt.subplot(325)
+currD = 18
+s = errors[currD - 2].std()
+m = errors[currD - 2].mean()
+dw = s / 2.5
+plt.hist(errors[currD - 2], bins=np.arange(-5 * s, 5 * s + dw, dw), density=True, label='empirical at D={}'.format(currD))
+plt.xlim(-2, 2)
+
+u = np.arange(-5 * s, 5 * s + dw, dw / 10)
+v = norm.pdf(u, loc=m, scale=s)
+plt.plot(u, v, label=r'gaussian fit $\mu={:.3f}, \sigma={:.3f}$'.format(m, s))
+# plt.text(0.05, 0.9, r'$\mu={:.3f}, \sigma={:.3f}$'.format(m, s), transform=plt.gca().transAxes)
+plt.xlabel('error')
+plt.ylabel('density')
+plt.legend(loc='upper left')
+
+plt.subplot(326)
+pvalues = [normaltest(i).pvalue for i in errors]
+pvalues2 = [shapiro(i).pvalue for i in errors]
+
+cor_pvalues = multipletests(pvalues)[1]
+
+# plt.bar(D[:, 0, 0]+0.25, pvalues, width=0.5)
+# plt.plot(D[:, 0, 0], pvalues2, 's-')
+# plt.bar(D[:, 0, 0]-0.25, cor_pvalues, width=0.5)
+plt.bar(D[:, 0, 0], cor_pvalues)
+
+plt.axhline(0.05, color='k', ls='--')
+plt.ylabel(r'$p$ value')
+plt.xlabel(r'$D$')
+
+plt.ylim(-0., 1.1)
 
 axs = np.array(fig.axes).flatten()
 [axs[i].text(-0.15, 1.05, tagging[i], transform=axs[i].transAxes, **tag_kwargs) for i in range(len(axs))]
