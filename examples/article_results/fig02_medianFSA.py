@@ -109,6 +109,10 @@ def get_variance(x, p):
     dx = np.diff(x)[0]
     return np.nansum(x ** 2 * p * dx) - get_mean(x, p) ** 2
 
+def sigma_stirl(k, n, D):
+    return 0.5 * np.sqrt(np.pi) / (np.log(2)) * ( D / np.sqrt(n*k) )
+
+
 # here is the sample size dependence
 
 x = np.arange(0, 50, 0.001)
@@ -139,9 +143,13 @@ for d_ind, d in enumerate(ds):
     axs[2].plot(Ns, sdev_med / d, color='{}'.format(cols[d_ind]),
                 marker='{}'.format(markers[d_ind]), lw=0, ms=8)
 
-
 axs[2].plot(Ns, sdev_med / d, 'k--', lw=2,
             label=r'$\mathrm{err}/D$')
+
+sstirl = np.array([sigma_stirl(k, Ns, D=i) for i in ds]).T
+axs[2].plot(Ns, sstirl[:, 0], color='grey', ls='--', label='Laplace\nStirling')
+axs[2].plot(Ns, sstirl[:, 1:], color='grey', ls='--')
+
 K = np.array(K)
 
 axs[2].legend(handlelength=0.6, loc='upper right')
@@ -189,6 +197,12 @@ for d_ind, d in enumerate(ds):
 
 axs[3].plot(ks, sdev_med / d, 'k--', lw=2,
             label=r'$\mathrm{err}/D$')
+
+# Laplace & Stirling approximation
+sstirl = np.array([sigma_stirl(ks, N, D=i) for i in ds]).T
+axs[3].plot(ks, sstirl, color='grey', ls='--')
+
+
 
 # axs[3].legend(handlelength=0.6, loc='upper right')
 
