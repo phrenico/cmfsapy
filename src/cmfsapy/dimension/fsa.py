@@ -4,7 +4,7 @@ from multiprocessing import cpu_count
 from scipy.stats import hmean
 
 
-def get_dists_inds_ck(X, k, boxsize):
+def get_dists_inds_ck(X, k, boxsize, p):
     """computes the kNN distances and indices
 
     :param numpy.ndarray X:  2D array with data shape: (ndata, n_vars)
@@ -13,7 +13,7 @@ def get_dists_inds_ck(X, k, boxsize):
     :return: KNN distances and indices
     """
     tree = cKDTree(X, boxsize=boxsize)
-    dists, inds = tree.query(X, k + 1, n_jobs=cpu_count())
+    dists, inds = tree.query(X, k + 1, workers=cpu_count(), p=p)
     return dists, inds
 
 def szepesvari_dimensionality(dists):
@@ -28,7 +28,7 @@ def szepesvari_dimensionality(dists):
     d = - np.log(2) / np.log(dists[:, lower_k] / dists[:, upper_k])
     return d
 
-def fsa(X, k, boxsize=None):
+def fsa(X, k, boxsize=None, p=2):
     """Measure local Szepesvari-Farahmand dimension, distances are computed by the cKDTree algoritm
 
     :param arraylike X: data series [n x dim] shape
@@ -36,7 +36,7 @@ def fsa(X, k, boxsize=None):
     :param boxsize: apply d-toroidal distance computation with edge-size =boxsize, see ckdtree class for more
     :return: local estimates, distances, indicees
     """
-    dists, inds = get_dists_inds_ck(X, 2*k, boxsize)
+    dists, inds = get_dists_inds_ck(X, 2*k, boxsize, p)
     dims = szepesvari_dimensionality(dists)
     return dims, dists, inds
 
